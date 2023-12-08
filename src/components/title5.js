@@ -1,11 +1,15 @@
 import React from 'react';
 import './css.css';
 
-function Title5() {
+function Title5({ onChange }) {
   return (
-    <div class="beneficios">
-      <h2>Descreva os benefícios</h2>
-      <textarea id="beneficios" name="beneficios"></textarea>
+    <div className="responsabilidades">
+      <h2>Responsabilidades</h2>
+      <textarea 
+        id="responsabilidades" 
+        name="responsabilidades"
+        onChange={onChange}
+      ></textarea>
     </div>
   );
 }
