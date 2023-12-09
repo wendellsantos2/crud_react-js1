@@ -67,22 +67,52 @@ function Formulario() {
  
     };
   
-    // Faz a requisição POST
-    fetch('https://localhost:7199/api/Vagas', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataToSend),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Sucesso:', data);
-      })
-      .catch((error) => {
-        console.error('Erro:', error);
-      });
-  };
+   
+  // Faz a requisição POST
+  fetch('https://localhost:7199/api/Vagas', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataToSend),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('A resposta da rede não foi ok.');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Sucesso:', data);
+    alert('Cadastrado com Sucesso: ');
+    window.location.reload();
+    // Limpa o formulário
+    setFormData({
+      empresa: '',
+      email: '',
+      cnpj: '',
+      fone: '',
+      nomeSolicitante: '',
+      tituloContratacao: '',
+      modalidadeContratacao: '',
+      periodoContratacao: '',
+      posicao: '',
+      horarioTrabalho: '',
+      prioridadeContratacao: '',
+      senioridade: '',
+      regimeTrabalho: '',
+      budgetMaximo: '',
+      descricaoBeneficios: '',
+      responsabilidades: '',
+      requisitosTecnicos: '',
+      requisitosComportamentais: '',
+    });
+  })
+  .catch((error) => {
+    console.error('Erro:', error);
+    alert('Erro: ' + error.message);
+  });
+};
 
   return (
     <form onSubmit={handleSubmit}>
